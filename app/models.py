@@ -54,6 +54,11 @@ class Prodi(db.Model):
     deleted_prodi = db.Column(db.Boolean, default=False)
     mahasiswa_prodi = db.relationship('Mahasiswa', backref='mahasiswa_prodi', lazy='dynamic')
 
+    def __repr__(self, id, nama_prodi, deleted_prodi):
+        self.id = id
+        self.nama_prodi = nama_prodi
+        self.deleted_prodi = deleted_prodi
+
 
 class JenisTagihan(db.Model):
 
