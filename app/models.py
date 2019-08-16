@@ -13,6 +13,11 @@ class Pengguna(db.Model):
     transaksi_tagihan = db.relationship('TransaksiTagihan', backref='tr_pengguna', lazy='dynamic')
     pembayaran_pegawai = db.relationship('Pembayaran', backref='pembayaran_pegawai', lazy='dynamic')
 
+    def __repr__(self,id,username,password_hash):
+        self.id = id
+        self.username = username
+        self.password_hash = password_hash
+
     @property
     def password(self):
         raise AttributeError('password is not areadable attribute.')
@@ -97,6 +102,23 @@ class TransaksiTagihan(db.Model):
     jumlah_kurang = db.Column(db.Integer)
     deleted_tr_tagihan = db.Column(db.Boolean, default=False)
     pembayaran = db.relationship('Pembayaran', backref='pembayaran_tr', lazy='dynamic')
+
+
+class RevokedToken(db.Model):
+    __tablename__ = 'revoked_tokens'
+
+    id = db.Column(db.Integer, primary_key=True)
+    jti = db.Column(db.String(120))
+
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def is_jti_blacklisted(cls, jti):
+        query = cls.query.filter_by(jti=jti).first()
+        return bool(query)
+
 
 
 
