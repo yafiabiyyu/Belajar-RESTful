@@ -142,8 +142,8 @@ def check_if_token_in_blacklist(dec_token):
 
 #endpoint setup
 api_pengguna.add_resource(PenggunaRegistration,'/pengguna/api/registration/')
-api_pengguna.add_resource(PenggunaLogin,'/pengguna/api/login/')
-api_pengguna.add_resource(PenggunaLogout,'/pengguna/api/logout/')
+api_pengguna.add_resource(PenggunaLogin,'/api/login/')
+api_pengguna.add_resource(PenggunaLogout,'/api/logout/')
 api_pengguna.add_resource(PenggunaLogoutRefresh, '/pengguna/api/logout/refresh/')
 api_pengguna.add_resource(TokenRefresh, '/pengguna/api/token/refresh/')
 api_pengguna.add_resource(ListPengguna,'/pengguna/api/data/pengguna/')
